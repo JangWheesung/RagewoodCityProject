@@ -12,6 +12,10 @@ public class Grenade : MonoBehaviour
     [Header("bombStat")]
     public float bombRadius;
     public float bombDmg;
+    public bool fire;
+    public bool ice;
+    public bool gas;
+    private float empacTime = 5;
 
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
@@ -47,9 +51,22 @@ public class Grenade : MonoBehaviour
         DOTween.To(() => vCam.m_AmplitudeGain, val => vCam.m_AmplitudeGain = val, 0f, 1f);
     }
 
-    protected void BombAttact()
+    private void BombAttact()
     {
         Collider2D[] collider2D = Physics2D.OverlapCircleAll(transform.position, bombRadius, LayerMask.GetMask("Enemy"));
+        foreach (Collider2D enemy in collider2D)
+        {
+            float distance = Vector2.Distance(transform.position, enemy.transform.position);
+            Vector2 nuckbackDir = enemy.transform.position.x - transform.position.x > 0 ? Vector2.right : Vector2.left;
+            enemy.GetComponent<Living>().OnDamage(bombDmg, bombRadius - distance, nuckbackDir);
+
+            if (fire)
+                enemy.GetComponent<Living>().OnFireBomb(bombDmg / 10, empacTime);
+            if (ice)
+                enemy.GetComponent<Living>().OnIceBomb(empacTime);
+            if(gas)
+                enemy.GetComponent<Living>().OnGasBomb(empacTime);
+        }
     }
 
     private void OnDrawGizmos()

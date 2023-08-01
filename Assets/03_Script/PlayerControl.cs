@@ -32,7 +32,7 @@ public class PlayerControl : PlayerRoot
         //양 옆 이동
         float x = Input.GetAxis("Horizontal") * moveSpeed;
         rb.velocity = new Vector2(x + dashLength, rb.velocity.y);
-        
+
         //점프
         if (Input.GetKeyDown(KeyCode.Space) && jumpCnt > 0)
         {

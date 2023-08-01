@@ -492,8 +492,9 @@ GameObject:
   - component: {fileID: 1346446321}
   - component: {fileID: 1346446320}
   - component: {fileID: 1346446319}
+  - component: {fileID: 1346446325}
   - component: {fileID: 1346446324}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -739,6 +740,20 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &1346446325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346446318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2227ba6b2591f84e9f3725bc2273e67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grenade: {fileID: 5773574176166797891, guid: 04b0a912835a6ee43a0bcfa83611162c, type: 3}
+  throwSpeed: 30
 --- !u!1 &1505687779
 GameObject:
   m_ObjectHideFlags: 0

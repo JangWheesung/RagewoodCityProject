@@ -58,7 +58,7 @@ public class Grenade : MonoBehaviour
         {
             float distance = Vector2.Distance(transform.position, enemy.transform.position);
             Vector2 nuckbackDir = enemy.transform.position.x - transform.position.x > 0 ? Vector2.right : Vector2.left;
-            enemy.GetComponent<Living>().OnDamage(bombDmg, bombRadius - distance, nuckbackDir);
+            enemy.GetComponent<Living>().OnDamage(bombDmg, (bombRadius - distance) / 2, nuckbackDir);
 
             if (fire)
                 enemy.GetComponent<Living>().OnFireBomb(bombDmg / 10, empacTime);

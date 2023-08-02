@@ -1,21 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Living : MonoBehaviour
 {
-    [SerializeField] private float hp;
+    [SerializeField] protected float hp;
 
     private SpriteRenderer spriteRenderer;
+    protected RectTransform hpBar;
+    protected Slider slider;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        Debug.Log(spriteRenderer);
     }
 
     public void OnDamage(float dmg)
     {
         hp -= dmg;
+        slider.value -= dmg;
 
         StartCoroutine(DamageColor(0.1f));
     }
@@ -23,6 +28,7 @@ public class Living : MonoBehaviour
     public void OnDamage(float dmg, float nuckbackLength, Vector3 nuckbackDir)
     {
         hp -= dmg;
+        slider.value -= dmg;
         transform.position += nuckbackDir * nuckbackLength;
 
         StartCoroutine(DamageColor(0.1f));

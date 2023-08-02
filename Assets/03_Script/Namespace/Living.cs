@@ -50,17 +50,17 @@ public abstract class Living : MonoBehaviour
         StartCoroutine(DamageColor(0.1f));
     }
 
-    public IEnumerator OnFireBomb(float dmg, float time)
+    public virtual IEnumerator OnFireBomb(float dmg, float time)
     {
         yield return new WaitForSeconds(time);
     }
 
-    public IEnumerator OnIceBomb(float time)
+    public virtual IEnumerator OnIceBomb(float time)
     {
         yield return new WaitForSeconds(time);
     }
 
-    public IEnumerator OnGasBomb(float time)
+    public virtual IEnumerator OnGasBomb(float time)
     {
         yield return new WaitForSeconds(time);
     }

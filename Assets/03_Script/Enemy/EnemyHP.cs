@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class EnemyHP : Living
 {
     [SerializeField] private GameObject prfHpBar;
+    [SerializeField] private GameObject dieEmpact;
 
     private GameObject canvers;
     private Camera mainCam;
@@ -51,7 +52,7 @@ public class EnemyHP : Living
         {
             hp = 1;
             hpBar.gameObject.SetActive(false);
-            //Destroy(hpBar);
+            PoolingManager.instance.Pop(dieEmpact.name, transform.position);
             PoolingManager.instance.Push(gameObject);
         }
     }

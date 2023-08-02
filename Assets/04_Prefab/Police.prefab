@@ -148,3 +148,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 10
   prfHpBar: {fileID: 4113114834086339583, guid: 71049b7adb6907542ba4dbdd36031ad4, type: 3}
+  dieEmpact: {fileID: 2219490252328996378, guid: 13fcdd0f6f9e0614181ba4b1677f9c97, type: 3}

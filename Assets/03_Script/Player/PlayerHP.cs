@@ -27,7 +27,7 @@ public class PlayerHP : Living
     {
         canvers = GameObject.Find("Canvas");
 
-        hpBar = Instantiate(prfHpBar, canvers.transform).GetComponent<RectTransform>();
+        hpBar = Instantiate(prfHpBar, canvers.transform.Find("PlayerSlider")).GetComponent<RectTransform>();
         slider = hpBar.GetComponent<Slider>();
 
         slider.maxValue = hp;
@@ -37,6 +37,10 @@ public class PlayerHP : Living
     void Update()
     {
         Die();
+    }
+
+    private void FixedUpdate()
+    {
         Hpbar();
     }
 

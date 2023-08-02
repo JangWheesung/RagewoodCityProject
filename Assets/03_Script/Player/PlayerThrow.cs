@@ -1,17 +1,60 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerThrow : PlayerRoot
 {
+    [Header("Grenade")]
     [SerializeField] private GameObject grenade;
     [SerializeField] private GameObject circle;
     [SerializeField] private float throwSpeed;
     [SerializeField] private float gravity;
+    [SerializeField] private float reloadTime;
+    private bool canThrow = true;
+
+    [Header("Bar")]
+    [SerializeField] private GameObject prfBar;
+    private GameObject canvers;
+    private Camera mainCam;
+    private RectTransform grenadeBar;
+    private Slider slider;
+
+    const float height = 1.8f;
+
+    private void Start()
+    {
+        GrenadebarSetting();
+    }
 
     private void Update()
     {
+        ThrowControl();
+    }
+
+    private void FixedUpdate()
+    {
         DirectionControl();
+        Grenadebar();
+    }
+
+    private void GrenadebarSetting()
+    {
+        mainCam = Camera.main;
+        canvers = GameObject.Find("Canvas");
+
+        grenadeBar = Instantiate(prfBar, canvers.transform.Find("PlayerSlider")).GetComponent<RectTransform>();
+        slider = grenadeBar.GetComponent<Slider>();
+
+        grenadeBar.gameObject.SetActive(false);
+    }
+
+    private void Grenadebar()
+    {
+        Vector3 grenadeBarVec = new Vector3(transform.position.x, transform.position.y + height, 0);
+        Vector3 grenadeBarPos = mainCam.WorldToScreenPoint(grenadeBarVec);
+        grenadeBar.position = grenadeBarPos;
     }
 
     private void DirectionControl()
@@ -24,14 +67,21 @@ public class PlayerThrow : PlayerRoot
             Vector2 point = Camera.main.ScreenToWorldPoint(mousePos);
             DrawParabola(DirectionSetting(point));
         }
-
+    }
+    private void ThrowControl()
+    {
         if (Input.GetMouseButtonUp(0))
         {
             lineRenderer.enabled = false;
 
-            Vector2 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z);
-            Vector2 point = Camera.main.ScreenToWorldPoint(mousePos);
-            ThrowGrenade(DirectionSetting(point));
+            if (canThrow)
+            {
+                Vector2 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z);
+                Vector2 point = Camera.main.ScreenToWorldPoint(mousePos);
+                ThrowGrenade(DirectionSetting(point));
+
+                StartCoroutine(Reload());
+            }
         }
     }
 
@@ -72,10 +122,25 @@ public class PlayerThrow : PlayerRoot
 
     private void ThrowGrenade(Vector2 dir)
     {
-        if (Input.GetMouseButtonUp(0))
+        GameObject newGrenade = Instantiate(grenade, transform.position, Quaternion.identity);
+        newGrenade.GetComponent<Rigidbody2D>().AddForce(dir * throwSpeed, ForceMode2D.Impulse);
+    }
+
+    private IEnumerator Reload()
+    {
+        grenadeBar.gameObject.SetActive(true);
+        canThrow = false;
+
+        float time = 0;
+        slider.value = reloadTime;
+        while (time < 1)
         {
-            GameObject newGrenade = Instantiate(grenade, transform.position, Quaternion.identity);
-            newGrenade.GetComponent<Rigidbody2D>().AddForce(dir * throwSpeed, ForceMode2D.Impulse);
+            yield return new WaitForSeconds(0.05f);
+            time += (1 / reloadTime);
+            slider.value = time;
         }
+
+        grenadeBar.gameObject.SetActive(false);
+        canThrow = true;
     }
 }

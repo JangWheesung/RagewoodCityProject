@@ -47,7 +47,8 @@ public class PlayerThrow : PlayerRoot
         float time = 0;
         float timeStep = 0.02f; // 시뮬레이션 간격
         Vector2 currentPosition = transform.position;
-        Vector2 currentVelocity = dir * throwSpeed;
+        Vector2 currentVelocity = dir * throwSpeed - new Vector2(Input.GetAxis("Horizontal") * 19, 0);
+        //Vector2 currentVelocityX = Input.GetAxis("Horizontal");
 
         int positionCount = 1;
         while (true)

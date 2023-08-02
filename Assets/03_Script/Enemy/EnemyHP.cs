@@ -12,13 +12,9 @@ public class EnemyHP : Living
     private GameObject canvers;
     private Camera mainCam;
 
-    const float height = 1f;
-
     private void OnEnable()
     {
         base.Awake();
-
-        HpbarSetting();
     }
 
     void Update()
@@ -27,9 +23,8 @@ public class EnemyHP : Living
         Hpbar();
     }
 
-    void HpbarSetting()
+    protected override void HpbarSetting()
     {
-        mainCam = Camera.main;
         canvers = GameObject.Find("Canvas");
 
         hpBar = Instantiate(prfHpBar, canvers.transform.Find("Hpbars")).GetComponent<RectTransform>();
@@ -37,13 +32,6 @@ public class EnemyHP : Living
 
         slider.maxValue = hp;
         slider.value = hp;
-    }
-
-    void Hpbar()
-    {
-        Vector3 hpBarVec = new Vector3(transform.position.x, transform.position.y + height, 0);
-        Vector3 hpBarPos = mainCam.WorldToScreenPoint(hpBarVec);
-        hpBar.position = hpBarPos;
     }
 
     void Die()

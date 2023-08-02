@@ -53,7 +53,7 @@ public class Grenade : MonoBehaviour
 
     private void BombAttact()
     {
-        Collider2D[] collider2D = Physics2D.OverlapCircleAll(transform.position, bombRadius, LayerMask.GetMask("Enemy"));
+        Collider2D[] collider2D = Physics2D.OverlapCircleAll(transform.position, bombRadius, LayerMask.GetMask("Enemy", "Player"));
         foreach (Collider2D enemy in collider2D)
         {
             float distance = Vector2.Distance(transform.position, enemy.transform.position);

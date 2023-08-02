@@ -3,18 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Living : MonoBehaviour
+public abstract class Living : MonoBehaviour
 {
     [SerializeField] protected float hp;
 
+    private GameObject canvers;
+    private Camera mainCam;
     private SpriteRenderer spriteRenderer;
     protected RectTransform hpBar;
     protected Slider slider;
+
+    const float height = 1f;
 
     protected virtual void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.color = Color.white;
+
+        mainCam = Camera.main;
+        HpbarSetting();
+    }
+
+    protected abstract void HpbarSetting();
+
+    protected void Hpbar()
+    {
+        Vector3 hpBarVec = new Vector3(transform.position.x, transform.position.y + height, 0);
+        Vector3 hpBarPos = mainCam.WorldToScreenPoint(hpBarVec);
+        hpBar.position = hpBarPos;
     }
 
     public void OnDamage(float dmg)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,20 +8,21 @@ public abstract class Living : MonoBehaviour
 {
     [SerializeField] protected float hp;
 
-    private GameObject canvers;
     private Camera mainCam;
+    protected GameObject canvers;
     private SpriteRenderer spriteRenderer;
     protected RectTransform hpBar;
     protected Slider slider;
 
     const float height = 1f;
 
-    protected virtual void Awake()
+    protected virtual void OnEnable()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.color = Color.white;
 
         mainCam = Camera.main;
+        canvers = GameObject.Find("Canvas");
         HpbarSetting();
     }
 

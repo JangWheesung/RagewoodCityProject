@@ -12,12 +12,8 @@ public class PlayerHP : Living
     [SerializeField] private float heeling;
     [SerializeField] private float heelTime;
 
-    private GameObject canvers;
-    private Camera mainCam;
-
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
         maxHp = hp;
 
         StartCoroutine(Heel());
@@ -25,8 +21,6 @@ public class PlayerHP : Living
 
     protected override void HpbarSetting()
     {
-        canvers = GameObject.Find("Canvas");
-
         hpBar = Instantiate(prfHpBar, canvers.transform.Find("PlayerSlider")).GetComponent<RectTransform>();
         slider = hpBar.GetComponent<Slider>();
 
@@ -52,7 +46,11 @@ public class PlayerHP : Living
 
             if (hp < maxHp)
             {
-                hp += heeling;
+                if (hp + heeling > 30f)
+                    hp = maxHp;
+                else
+                    hp += heeling;
+
                 slider.value = hp;
             }
         }

@@ -9,14 +9,6 @@ public class EnemyHP : Living
     [SerializeField] private GameObject prfHpBar;
     [SerializeField] private GameObject dieEmpact;
 
-    private GameObject canvers;
-    private Camera mainCam;
-
-    private void OnEnable()
-    {
-        base.Awake();
-    }
-
     void Update()
     {
         Die();
@@ -25,8 +17,6 @@ public class EnemyHP : Living
 
     protected override void HpbarSetting()
     {
-        canvers = GameObject.Find("Canvas");
-
         hpBar = Instantiate(prfHpBar, canvers.transform.Find("Hpbars")).GetComponent<RectTransform>();
         slider = hpBar.GetComponent<Slider>();
 

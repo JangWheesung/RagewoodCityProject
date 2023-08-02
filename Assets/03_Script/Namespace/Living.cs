@@ -14,7 +14,7 @@ public class Living : MonoBehaviour
     protected virtual void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        Debug.Log(spriteRenderer);
+        spriteRenderer.color = Color.white;
     }
 
     public void OnDamage(float dmg)

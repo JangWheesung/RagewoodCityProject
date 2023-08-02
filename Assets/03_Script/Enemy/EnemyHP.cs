@@ -13,26 +13,32 @@ public class EnemyHP : Living
 
     const float height = 1f;
 
-    protected override void Awake()
+    private void OnEnable()
     {
         base.Awake();
 
+        HpbarSetting();
+    }
+
+    void Update()
+    {
+        Die();
+        Hpbar();
+    }
+
+    void HpbarSetting()
+    {
         mainCam = Camera.main;
         canvers = GameObject.Find("Canvas");
-        hpBar = Instantiate(prfHpBar, canvers.transform).GetComponent<RectTransform>();
+
+        hpBar = Instantiate(prfHpBar, canvers.transform.Find("Hpbars")).GetComponent<RectTransform>();
         slider = hpBar.GetComponent<Slider>();
 
         slider.maxValue = hp;
         slider.value = hp;
     }
 
-    void Update()
-    {
-        Die();
-        HpBar();
-    }
-
-    void HpBar()
+    void Hpbar()
     {
         Vector3 hpBarVec = new Vector3(transform.position.x, transform.position.y + height, 0);
         Vector3 hpBarPos = mainCam.WorldToScreenPoint(hpBarVec);
@@ -43,8 +49,10 @@ public class EnemyHP : Living
     {
         if (hp <= 0)
         {
-            Destroy(hpBar);
-            Destroy(gameObject);
+            hp = 1;
+            hpBar.gameObject.SetActive(false);
+            //Destroy(hpBar);
+            PoolingManager.instance.Push(gameObject);
         }
     }
 }

@@ -18,7 +18,7 @@ public class GameoverPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        image.DOFade(1, 1f).OnComplete(() => {
+        image.DOFade(1, 0.1f).OnComplete(() => {
             Time.timeScale = 1;
             gameoverText.DOMoveY(-200, 2f).SetEase(Ease.OutBack).OnComplete(() => {
                 ScnenManager.instance.MoveMainScene();

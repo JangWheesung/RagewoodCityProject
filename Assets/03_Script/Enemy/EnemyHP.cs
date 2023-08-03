@@ -30,6 +30,7 @@ public class EnemyHP : Living
         {
             hp = 1;
             hpBar.gameObject.SetActive(false);
+            PoliceSponManager.instance.diePolices++;
             PoolingManager.instance.Pop(dieEmpact.name, transform.position);
             PoolingManager.instance.Push(gameObject);
         }

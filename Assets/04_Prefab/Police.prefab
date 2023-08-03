@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playeRadius: 15
-  moveSpeed: 3
+  moveSpeed: 7
   rotateSpeed: 20
   attackPower: 0.1
   attackDelay: 0.1

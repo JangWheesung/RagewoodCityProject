@@ -24,11 +24,6 @@ public class PoolingManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P)) Pop("Police", Vector2.zero);
-    }
-
     public void Push(GameObject obj)
     {
         if (!pools.ContainsKey(obj.name)) return;

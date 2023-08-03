@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public abstract class Living : MonoBehaviour
 {
-    [SerializeField] protected float hp;
+    public float hp;
 
     private Camera mainCam;
     protected GameObject canvers;

@@ -8,7 +8,6 @@ public class PlayerThrow : PlayerRoot
 {
     [Header("Grenade")]
     [SerializeField] private GameObject grenade;
-    [SerializeField] private GameObject circle;
     [SerializeField] private float throwSpeed;
     [SerializeField] private float gravity;
     [SerializeField] private float reloadTime;
@@ -125,6 +124,7 @@ public class PlayerThrow : PlayerRoot
         GameObject newGrenade = PoolingManager.instance.Pop(grenade.name, transform.position);
         newGrenade.GetComponent<Rigidbody2D>().AddForce(dir * throwSpeed, ForceMode2D.Impulse);
         float throwDir = dir.x > 0 ? -400 : dir.x < 0 ? 400 : 0;
+        Debug.Log(throwDir);
         newGrenade.GetComponent<Grenade>().rotateValue = throwDir;
     }
 

@@ -39,6 +39,7 @@ public class Grenade : MonoBehaviour
         cam = FindObjectOfType<CinemachineVirtualCamera>();
         vCam = cam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
+        stopRotate = false;
         StartCoroutine(Bomb());
     }
 

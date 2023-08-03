@@ -25,9 +25,10 @@ public class Grenade : MonoBehaviour
     private CinemachineVirtualCamera cam;
     private CinemachineBasicMultiChannelPerlin vCam;
 
-    void Awake()
+    void OnEnable()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.enabled = true;
         rb = GetComponent<Rigidbody2D>();
 
         particle = transform.GetChild(0).GetComponent<ParticleSystem>();
@@ -83,6 +84,6 @@ public class Grenade : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        Destroy(gameObject);
+        PoolingManager.instance.Push(gameObject);
     }
 }

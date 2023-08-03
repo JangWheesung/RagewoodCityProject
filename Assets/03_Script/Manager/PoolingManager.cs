@@ -37,9 +37,9 @@ public class PoolingManager : MonoBehaviour
         obj.SetActive(false);
     }
 
-    public void Pop(string name, Vector3 point)
+    public GameObject Pop(string name, Vector3 point)
     {
-        if (!pools.ContainsKey(name)) return;
+        if (!pools.ContainsKey(name)) return null;
 
         Transform poolTransform = transform.GetChild(pools[name]);
         GameObject poolObj;
@@ -56,5 +56,7 @@ public class PoolingManager : MonoBehaviour
         }
         poolObj.transform.position = point;
         poolObj.name = name;
+
+        return poolObj;
     }
 }

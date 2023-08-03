@@ -122,7 +122,7 @@ public class PlayerThrow : PlayerRoot
 
     private void ThrowGrenade(Vector2 dir)
     {
-        GameObject newGrenade = Instantiate(grenade, transform.position, Quaternion.identity);
+        GameObject newGrenade = PoolingManager.instance.Pop(grenade.name, transform.position);
         newGrenade.GetComponent<Rigidbody2D>().AddForce(dir * throwSpeed, ForceMode2D.Impulse);
     }
 

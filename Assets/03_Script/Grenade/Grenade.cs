@@ -25,6 +25,9 @@ public class Grenade : MonoBehaviour
     private CinemachineVirtualCamera cam;
     private CinemachineBasicMultiChannelPerlin vCam;
 
+    public float rotateValue;
+    bool stopRotate;
+
     void OnEnable()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -39,10 +42,25 @@ public class Grenade : MonoBehaviour
         StartCoroutine(Bomb());
     }
 
+    private void Update()
+    {
+        RotateGrenade();
+    }
+
+    void RotateGrenade()
+    {
+        if (!stopRotate)
+        {
+            rb.rotation += Time.deltaTime * rotateValue;
+        }
+    }
+
     void BombEmpact()
     {
+        stopRotate = true;
         spriteRenderer.enabled = false;
 
+        rb.rotation = 0;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         transform.localRotation = Quaternion.identity;
         particle.Play();

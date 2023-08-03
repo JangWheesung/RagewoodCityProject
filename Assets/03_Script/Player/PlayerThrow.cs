@@ -124,6 +124,8 @@ public class PlayerThrow : PlayerRoot
     {
         GameObject newGrenade = PoolingManager.instance.Pop(grenade.name, transform.position);
         newGrenade.GetComponent<Rigidbody2D>().AddForce(dir * throwSpeed, ForceMode2D.Impulse);
+        float throwDir = dir.x > 0 ? -400 : dir.x < 0 ? 400 : 0;
+        newGrenade.GetComponent<Grenade>().rotateValue = throwDir;
     }
 
     private IEnumerator Reload()

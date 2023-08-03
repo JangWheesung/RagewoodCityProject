@@ -122,7 +122,6 @@ public class EnemyFSM : PlayerRoot
 
     IEnumerator AttackDelay()
     {
-        Debug.Log("ÇÑ¹ø¸¸");
         while (state == State.Attack)
         {
             playerHP.OnDamage(attackPower);

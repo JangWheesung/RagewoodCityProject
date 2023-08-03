@@ -9,7 +9,7 @@ public class PlayerHP : Living
     [SerializeField] private GameObject prfHpBar;
     [SerializeField] private GameObject gameoverPanel;
     [Header("HpStat")]
-    [SerializeField] private float maxHp;
+    private float maxHp;
     [SerializeField] private float heeling;
     [SerializeField] private float heelTime;
 
@@ -59,7 +59,11 @@ public class PlayerHP : Living
 
     void Die()
     {
-        gameoverPanel.SetActive(true);
-        Time.timeScale = 0.1f;
+        if (hp <= 0 && hp >= -999)
+        {
+            hp = -1000;
+            gameoverPanel.SetActive(true);
+            Time.timeScale = 0.1f;
+        }
     }
 }

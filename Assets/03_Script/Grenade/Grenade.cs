@@ -20,6 +20,7 @@ public class Grenade : MonoBehaviour
     [Header("Particle")]
     [SerializeField] private GameObject fireParticle;
     [SerializeField] private GameObject iceParticle;
+    [SerializeField] private GameObject gasParticle;
 
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
@@ -91,7 +92,10 @@ public class Grenade : MonoBehaviour
                 if (ice)
                     enemy.GetComponent<Living>().OnIceDamage(empacTime, iceParticle);
                 if (gas)
+                {
+                    PoolingManager.instance.Pop(gasParticle.name, transform.position);
                     enemy.GetComponent<Living>().OnGasDamage(empacTime);
+                }
             }
         }
     }

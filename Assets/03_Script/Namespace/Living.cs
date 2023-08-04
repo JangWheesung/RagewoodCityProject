@@ -73,7 +73,6 @@ public abstract class Living : MonoBehaviour
         for (int i = 0; i < time; i++)
         {
             yield return new WaitForSeconds(1);
-            Debug.Log(i);
             OnDamage(dmg);
         }
 

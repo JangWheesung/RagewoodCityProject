@@ -140,9 +140,9 @@ MonoBehaviour:
   bombTime: 3
   bombRadius: 8
   bombDmg: 5
-  fire: 1
-  ice: 1
-  gas: 1
+  fire: 0
+  ice: 0
+  gas: 0
   fireParticle: {fileID: 8509095551527081057, guid: 940b940d91c240e46abfb26b002a7f88, type: 3}
   iceParticle: {fileID: 8509095551527081057, guid: a5c9aabdb8be71647b19ba8477d637a4, type: 3}
   gasParticle: {fileID: 7268393388223354029, guid: f4fd1d7ea49ed0941ab124ebc38d87d8, type: 3}

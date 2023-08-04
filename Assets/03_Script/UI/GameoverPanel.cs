@@ -18,9 +18,11 @@ public class GameoverPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        image.DOFade(1, 0.1f).OnComplete(() => {
+        image.DOFade(1, 0.2f).OnComplete(() => {
+            Debug.Log($"1:{Time.timeScale}");
             Time.timeScale = 1;
-            gameoverText.DOMoveY(-200, 2f).SetEase(Ease.OutBack).OnComplete(() => {
+            gameoverText.DOMoveY(-400, 2f).SetEase(Ease.OutBack).OnComplete(() => {
+                Debug.Log($"2:{Time.timeScale}");
                 ScnenManager.instance.MoveMainScene();
             });
         });

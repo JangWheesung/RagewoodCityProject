@@ -61,7 +61,7 @@ public class PlayerHP : Living
     {
         if (hp <= 0 && hp >= -999)
         {
-            hp = -1000;
+            hp = -1999;
             gameoverPanel.SetActive(true);
             Time.timeScale = 0.1f;
         }

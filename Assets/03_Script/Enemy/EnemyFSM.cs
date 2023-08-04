@@ -74,6 +74,9 @@ public class EnemyFSM : PlayerRoot
 
         float distance = Mathf.Clamp(playerTrs.position.x - transform.position.x, -1f, 1f);
         rb.velocity = new Vector2(distance * moveSpeed, rb.velocity.y);
+
+        if (rb.velocity.y == 0)
+            rb.AddForce(Vector2.up * 30, ForceMode2D.Impulse);
     }
 
     void AttackState()

@@ -24,7 +24,7 @@ public class EnemyHP : Living
         slider.value = hp;
     }
 
-    void Die()
+    private void Die()
     {
         if (hp <= 0)
         {

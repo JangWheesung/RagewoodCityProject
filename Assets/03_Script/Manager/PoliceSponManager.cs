@@ -24,7 +24,7 @@ public class PoliceSponManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        StartCoroutine(Sponing());
+        //StartCoroutine(Sponing());
     }
 
     private void SponPolice()

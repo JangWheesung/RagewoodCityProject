@@ -17,6 +17,10 @@ public class Grenade : MonoBehaviour
     public bool gas;
     private float empacTime = 5;
 
+    [Header("Particle")]
+    [SerializeField] private GameObject fireParticle;
+    [SerializeField] private GameObject iceParticle;
+
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
 
@@ -73,19 +77,22 @@ public class Grenade : MonoBehaviour
 
     private void BombAttact()
     {
-        Collider2D[] collider2D = Physics2D.OverlapCircleAll(transform.position, bombRadius, LayerMask.GetMask("Enemy", "Player"));
+        Collider2D[] collider2D = Physics2D.OverlapCircleAll(transform.position, bombRadius, LayerMask.GetMask("Enemy"));
         foreach (Collider2D enemy in collider2D)
         {
-            float distance = Vector2.Distance(transform.position, enemy.transform.position);
-            Vector2 nuckbackDir = enemy.transform.position.x - transform.position.x > 0 ? Vector2.right : Vector2.left;
-            enemy.GetComponent<Living>().OnDamage(bombDmg, (bombRadius - distance) / 2, nuckbackDir);
+            if (enemy.gameObject.activeSelf)
+            {
+                float distance = Vector2.Distance(transform.position, enemy.transform.position);
+                Vector2 nuckbackDir = enemy.transform.position.x - transform.position.x > 0 ? Vector2.right : Vector2.left;
+                enemy.GetComponent<Living>().OnDamage(bombDmg, (bombRadius - distance) / 2, nuckbackDir);
 
-            if (fire)
-                enemy.GetComponent<Living>().OnFireBomb(bombDmg / 10, empacTime);
-            if (ice)
-                enemy.GetComponent<Living>().OnIceBomb(empacTime);
-            if(gas)
-                enemy.GetComponent<Living>().OnGasBomb(empacTime);
+                if (fire)
+                    enemy.GetComponent<Living>().OnFireDamage(bombDmg / 10, empacTime, fireParticle);
+                if (ice)
+                    enemy.GetComponent<Living>().OnIceDamage(empacTime, iceParticle);
+                if (gas)
+                    enemy.GetComponent<Living>().OnGasDamage(empacTime);
+            }
         }
     }
 

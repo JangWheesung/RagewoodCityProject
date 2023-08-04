@@ -57,7 +57,7 @@ public class PlayerHP : Living
         }
     }
 
-    void Die()
+    private void Die()
     {
         if (hp <= 0 && hp >= -999)
         {

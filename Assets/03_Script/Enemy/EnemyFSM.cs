@@ -107,10 +107,9 @@ public class EnemyFSM : PlayerRoot
 
     void StunState()
     {
-        spriteRenderer.color = Color.yellow;
-
         if (isGas) return;
         else isGas = true;
+
         isAttack = false;
         lineRenderer.enabled = false;
 

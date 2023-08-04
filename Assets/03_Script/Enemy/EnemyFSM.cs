@@ -10,7 +10,7 @@ public class EnemyFSM : PlayerRoot
     State state = State.Idle;
 
     [SerializeField] private float playeRadius;
-    [SerializeField] private float moveSpeed;
+    [SerializeField] public float moveSpeed;
     [SerializeField] private float rotateSpeed;
     [HideInInspector] public float attackPower;
     [SerializeField] private float attackDelay;

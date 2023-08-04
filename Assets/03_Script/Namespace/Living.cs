@@ -87,10 +87,18 @@ public abstract class Living : MonoBehaviour
 
         stateColor = Color.cyan;
 
+        float slowSpeed = GetComponent<EnemyFSM>().moveSpeed / 2;
+        GetComponent<EnemyFSM>().moveSpeed = slowSpeed;
+
         yield return new WaitForSeconds(time);
 
+        GetComponent<EnemyFSM>().moveSpeed = slowSpeed * 2;
+
         if (stateColor == Color.cyan)
+        {
             stateColor = Color.white;
+            spriteRenderer.color = stateColor;
+        }
     }
 
     private IEnumerator OnGasBomb(float time)
@@ -103,13 +111,8 @@ public abstract class Living : MonoBehaviour
 
         if (stateColor == purple)
         {
-            Debug.Log("¹Ù²Þ");
             stateColor = Color.white;
-        }
-        else
-        {
-            Debug.Log(stateColor);
-            Debug.Log(stateColor == purple);
+            spriteRenderer.color = stateColor;
         }
     }
 

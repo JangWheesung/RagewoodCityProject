@@ -141,8 +141,8 @@ MonoBehaviour:
   bombRadius: 8
   bombDmg: 5
   fire: 0
-  ice: 0
-  gas: 1
+  ice: 1
+  gas: 0
   fireParticle: {fileID: 8509095551527081057, guid: 940b940d91c240e46abfb26b002a7f88, type: 3}
   iceParticle: {fileID: 0}
   rotateValue: 0

@@ -17,6 +17,8 @@ public class PlayerHP : Living
     {
         maxHp = hp;
 
+        base.OnEnable();
+        HpbarSetting();
         StartCoroutine(Heel());
     }
 

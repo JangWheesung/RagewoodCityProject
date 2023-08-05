@@ -10,11 +10,11 @@ public class Grenade : MonoBehaviour
     [SerializeField] private float bombTime;
 
     [Header("bombStat")]
-    public float bombRadius;
-    public float bombDmg;
-    public bool fire;
-    public bool ice;
-    public bool gas;
+    [HideInInspector] public float bombRadius;
+    [HideInInspector] public float bombDmg;
+    [HideInInspector] public bool fire;
+    [HideInInspector] public bool ice;
+    [HideInInspector] public bool gas;
     private float empacTime = 5;
 
     [Header("Particle")]
@@ -69,6 +69,8 @@ public class Grenade : MonoBehaviour
         rb.rotation = 0;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         transform.localRotation = Quaternion.identity;
+
+        particle.startSize = 0.7f + (0.1f * (bombRadius - 8));
         particle.Play();
 
         DOTween.KillAll();

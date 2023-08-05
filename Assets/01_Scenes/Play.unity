@@ -261,7 +261,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 17575203}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2633,7 +2633,23 @@ MonoBehaviour:
   image: {fileID: 1137959287}
   roulettePanel: {fileID: 68339969}
   rouletteImage: {fileID: 17575204}
+  rouletteBtn: {fileID: 993658458}
+  rouletteTime: 2
   maxGauge: 01000000
+  radiusValue:
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  dmgValue:
+  - 5
+  - 10
+  - 15
+  - 20
+  - 25
+  maxDrawcnt: 5
+  spinSpeed: 0
 --- !u!1001 &1263083956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3326,6 +3342,12 @@ MonoBehaviour:
   gravity: 39
   reloadTime: 5
   prfBar: {fileID: 4113114834086339583, guid: 81740ea8d428ea7469ff0e3ffc3de8ae, type: 3}
+  bombRadius: 0
+  bombDmg: 0
+  throwCnt: 1
+  fire: 0
+  ice: 0
+  gas: 0
 --- !u!120 &1346446326
 LineRenderer:
   m_ObjectHideFlags: 0

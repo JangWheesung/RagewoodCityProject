@@ -72,7 +72,7 @@ public class EnemyFSM : PlayerRoot
         isAttack = false;
         lineRenderer.enabled = false;
 
-        float distance = Mathf.Clamp(playerTrs.position.x - transform.position.x, -1f, 1f);
+        float distance = playerTrs.gameObject.activeSelf == true ? Mathf.Clamp(playerTrs.position.x - transform.position.x, -1f, 1f) : 0;
         rb.velocity = new Vector2(distance * moveSpeed, rb.velocity.y);
 
         if (rb.velocity.y == 0)

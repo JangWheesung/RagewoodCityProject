@@ -20,6 +20,14 @@ public class PlayerThrow : PlayerRoot
     private RectTransform grenadeBar;
     private Slider slider;
 
+    [Header("BuffEmpact")]
+    [HideInInspector] public float bombRadius;
+    [HideInInspector] public float bombDmg;
+    public int throwCnt = 1;
+    [HideInInspector] public bool fire;
+    [HideInInspector] public bool ice;
+    [HideInInspector] public bool gas;
+
     const float height = 1.8f;
 
     private void Start()
@@ -77,7 +85,7 @@ public class PlayerThrow : PlayerRoot
             {
                 Vector2 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z);
                 Vector2 point = Camera.main.ScreenToWorldPoint(mousePos);
-                ThrowGrenade(DirectionSetting(point));
+                StartCoroutine(ThrowGrenade(DirectionSetting(point)));
 
                 StartCoroutine(Reload());
             }
@@ -119,12 +127,24 @@ public class PlayerThrow : PlayerRoot
         }
     }
 
-    private void ThrowGrenade(Vector2 dir)
+    private IEnumerator ThrowGrenade(Vector2 dir)
     {
-        GameObject newGrenade = PoolingManager.instance.Pop(grenade.name, transform.position);
-        newGrenade.GetComponent<Rigidbody2D>().AddForce(dir * throwSpeed, ForceMode2D.Impulse);
-        float throwDir = dir.x > 0 ? -400 : dir.x < 0 ? 400 : 0;
-        newGrenade.GetComponent<Grenade>().rotateValue = throwDir;
+        for (int i = 0; i < throwCnt; i++)
+        {
+            GameObject newGrenade = PoolingManager.instance.Pop(grenade.name, transform.position);
+            newGrenade.GetComponent<Rigidbody2D>().AddForce(dir * throwSpeed, ForceMode2D.Impulse);
+
+            float throwDir = dir.x > 0 ? -400 : dir.x < 0 ? 400 : 0;
+            newGrenade.GetComponent<Grenade>().rotateValue = throwDir;
+
+            newGrenade.GetComponent<Grenade>().bombRadius = bombRadius;
+            newGrenade.GetComponent<Grenade>().bombDmg = bombDmg;
+            newGrenade.GetComponent<Grenade>().fire = fire == true ? true : false;
+            newGrenade.GetComponent<Grenade>().ice = ice == true ? true : false;
+            newGrenade.GetComponent<Grenade>().gas = gas == true ? true : false;
+
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 
     private IEnumerator Reload()

@@ -15,6 +15,12 @@ public class EnemyHP : Living
         Hpbar();
     }
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        HpbarSetting();
+    }
+
     protected override void HpbarSetting()
     {
         hpBar = Instantiate(prfHpBar, canvers.transform.Find("Hpbars")).GetComponent<RectTransform>();

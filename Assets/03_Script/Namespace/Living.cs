@@ -25,7 +25,6 @@ public abstract class Living : MonoBehaviour
 
         mainCam = Camera.main;
         canvers = GameObject.Find("Canvas");
-        HpbarSetting();
     }
 
     protected abstract void HpbarSetting();

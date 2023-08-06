@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 public class GaugeManager : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class GaugeManager : MonoBehaviour
     [SerializeField] private float[] radiusValue;
     [SerializeField] private float[] dmgValue;
     [SerializeField] private int maxDrawcnt;
+    [Header("Text")]
+    [SerializeField] private TextMeshProUGUI levelText;
 
     public float spinSpeed;
     private int gaugeLevel = 0;
@@ -38,40 +41,29 @@ public class GaugeManager : MonoBehaviour
     private void Update()
     {
         rouletteImage.Rotate(0, 0, spinSpeed);
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            GaugeUp();
-        }
     }
 
     public void GaugeUp()
     {
         image.fillAmount += (1f / maxGauge[gaugeLevel]);
-        if (image.fillAmount >= 1)
+        if (image.fillAmount >= 1 && gaugeLevel < maxGauge.Length - 1)
         {
             image.fillAmount = 0;
-            gaugeLevel = maxGauge.Length - 1 <= gaugeLevel ? gaugeLevel : gaugeLevel + 1;
+            gaugeLevel++;
+            levelText.text = gaugeLevel == maxGauge.Length - 1 ? "Lv.max" : $"Lv.{gaugeLevel}";
 
             rouletteImage.rotation = Quaternion.identity;
             rouletteBtn.onClick.AddListener(RouletteSpin);
             RouletteActive(true);
         }
+        image.fillAmount = 0;
     }
 
     private void RouletteActive(bool active)
     {
-        if (active)
-        {
-            roulettePanel.DOMoveY(500, 1f).SetEase(Ease.OutCirc).OnComplete(() =>
-            {
-                playerThrow.gameObject.SetActive(!active);
-            });
-        }
-        else
-        {
-            playerThrow.gameObject.SetActive(!active);
-            roulettePanel.DOMoveY(-550, 0.5f).SetEase(Ease.OutCirc);
-        }
+        float posY = active == true ? 500 : -550;
+        playerThrow.gameObject.SetActive(!active);
+        roulettePanel.DOMoveY(posY, 0.5f).SetEase(Ease.OutCirc);
     }
 
     private void RouletteSpin()

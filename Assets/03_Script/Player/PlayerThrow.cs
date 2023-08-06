@@ -164,4 +164,11 @@ public class PlayerThrow : PlayerRoot
         grenadeBar.gameObject.SetActive(false);
         canThrow = true;
     }
+
+    private void OnDisable()
+    {
+        lineRenderer.enabled = false;
+        grenadeBar.gameObject.SetActive(false);
+        canThrow = true;
+    }
 }

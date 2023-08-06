@@ -61,4 +61,10 @@ public class PlayerControl : PlayerRoot
         yield return new WaitForSeconds(time);
         dashDelay = false;
     }
+
+    private void OnDisable()
+    {
+        dashLength = 0;
+        dashDelay = false;
+    }
 }

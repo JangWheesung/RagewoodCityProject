@@ -42,5 +42,7 @@ public class GameoverManager : MonoBehaviour
                 Invoke("SeenMove", waitTime / 2);
             }
         });
+
+        image.gameObject.SetActive(value == 1 ? true : false);
     }
 }

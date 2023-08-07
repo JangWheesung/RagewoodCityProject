@@ -25,9 +25,11 @@ public class GaugeManager : MonoBehaviour
     [Header("Text")]
     [SerializeField] private TextMeshProUGUI levelText;
 
+    private List<int> benList = new List<int>();
     public float spinSpeed;
     private int gaugeLevel = 0;
     private int bombLevel = 0;
+    private bool isSpin;
 
     private void Awake()
     {
@@ -46,29 +48,37 @@ public class GaugeManager : MonoBehaviour
     public void GaugeUp()
     {
         image.fillAmount += (1f / maxGauge[gaugeLevel]);
-        if (image.fillAmount >= 1 && gaugeLevel < maxGauge.Length - 1)
+        if (image.fillAmount >= 1f && gaugeLevel < maxGauge.Length - 1)
         {
             image.fillAmount = 0;
             gaugeLevel++;
             levelText.text = gaugeLevel == maxGauge.Length - 1 ? "Lv.max" : $"Lv.{gaugeLevel}";
 
             rouletteImage.rotation = Quaternion.identity;
-            rouletteBtn.onClick.AddListener(RouletteSpin);
             RouletteActive(true);
         }
     }
 
     private void RouletteActive(bool active)
     {
-        float posY = active == true ? 500 : -550;
+        float posY = active == true ? 550 : -550;
         PoliceSponManager.instance.wait = active;
         playerThrow.gameObject.SetActive(!active);
-        roulettePanel.DOMoveY(posY, 0.5f).SetEase(Ease.OutCirc);
+        if (active)
+        {
+            StartCoroutine(RouletteUp());
+        }
+        else
+        {
+            roulettePanel.DOMoveY(-550, 0.5f).SetEase(Ease.OutCirc);
+        }
     }
 
-    private void RouletteSpin()
+    public void RouletteSpin()
     {
-        rouletteBtn.onClick.RemoveListener(RouletteSpin);
+        if (isSpin) return;
+        else isSpin = true;
+
         spinSpeed = 10f;
 
         StartCoroutine(StopSpin());
@@ -97,57 +107,31 @@ public class GaugeManager : MonoBehaviour
     float SetBuff()
     {
         int number = 0;
-        List<int> benList = new List<int>();
-        if (playerThrow.throwCnt >= maxDrawcnt)
+        bool re = true;
+        while (re)
         {
-            benList.Add(0);
-            benList.Add(1);
-            benList.Add(2);
-            benList.Add(3);
-            benList.Add(4);
-        }
-        if (playerThrow.fire)
-        {
-            benList.Add(9);
-            benList.Add(10);
-        }
-        if (playerThrow.ice)
-        {
-            benList.Add(7);
-            benList.Add(8);
-        }
-        if (playerThrow.gas)
-        {
-            benList.Add(5);
-            benList.Add(6); 
-        }
-        if (bombLevel >= radiusValue.Length)
-        {
-            benList.Add(11);
-            benList.Add(12);
-            benList.Add(13);
-            benList.Add(14);
-            benList.Add(15);
-            benList.Add(16);
-            benList.Add(17);
-            benList.Add(18);
-            benList.Add(19);
-        }
-        bool a = true;
-        while (a)
-        {
-            a = false;
+            re = false;
             number = Random.Range(0, 20);
             foreach (int ben in benList)
             {
                 if (number == ben)
-                    a = true;
+                    re = true;
             }
         }
-
+        benList.Add(number);
         return -95.6f + (number * 18f);
     }
-    //01234, 56, 78, 910, 11/12/13/14/15/16/17/18/19
+
+    private IEnumerator RouletteUp()
+    {
+        float value = 21;
+        for (int i = 0; i < 100; i++)
+        {
+            roulettePanel.transform.position += new Vector3(0, value, 0);
+            value -= 0.21f;
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
 
     private IEnumerator StopSpin()
     {
@@ -172,6 +156,9 @@ public class GaugeManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         RouletteActive(false);
+
+        yield return new WaitForSeconds(0.5f);
+        isSpin = false;
     }
 
     //0 ~ 90 : 개수 증가

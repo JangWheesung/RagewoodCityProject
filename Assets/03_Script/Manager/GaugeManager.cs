@@ -11,6 +11,12 @@ public class GaugeManager : MonoBehaviour
 
     private PlayerThrow playerThrow;
 
+    [Header("Icon")]
+    [SerializeField] private TextMeshProUGUI bombLevelText;
+    [SerializeField] private TextMeshProUGUI bombCntText;
+    [SerializeField] private GameObject fireIcon;
+    [SerializeField] private GameObject iceIcon;
+    [SerializeField] private GameObject gasIcon;
     [Header("Roulette")]
     [SerializeField] private Image image;
     [SerializeField] private RectTransform roulettePanel;
@@ -97,6 +103,17 @@ public class GaugeManager : MonoBehaviour
             playerThrow.bombRadius = radiusValue[bombLevel];
             playerThrow.bombDmg = dmgValue[bombLevel];
         }
+
+        StatIcon();
+    }
+
+    void StatIcon()
+    {
+        bombLevelText.text = $"Lv.{bombLevel}";
+        bombCntText.text = $"x {playerThrow.throwCnt}";
+        fireIcon.SetActive(playerThrow.fire);
+        iceIcon.SetActive(playerThrow.ice);
+        gasIcon.SetActive(playerThrow.gas);
     }
 
     bool BuffRange(float a, float b)

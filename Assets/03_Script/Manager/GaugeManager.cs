@@ -56,12 +56,12 @@ public class GaugeManager : MonoBehaviour
             rouletteBtn.onClick.AddListener(RouletteSpin);
             RouletteActive(true);
         }
-        image.fillAmount = 0;
     }
 
     private void RouletteActive(bool active)
     {
         float posY = active == true ? 500 : -550;
+        PoliceSponManager.instance.wait = active;
         playerThrow.gameObject.SetActive(!active);
         roulettePanel.DOMoveY(posY, 0.5f).SetEase(Ease.OutCirc);
     }

@@ -21,6 +21,8 @@ public class PoliceSponManager : MonoBehaviour
     [SerializeField] private float[] hpValue;
     [SerializeField] private float[] sponTime;
 
+    [HideInInspector] public bool wait;
+
     private void Awake()
     {
         instance = this;
@@ -45,7 +47,8 @@ public class PoliceSponManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(sponTime[wantedLevel()]);
-            SponPolice();
+            if(!wait)
+                SponPolice();
         }
     }
 }

@@ -7,7 +7,6 @@ using UnityEngine;
 public class PlayerHP : Living
 {
     [SerializeField] private GameObject prfHpBar;
-    [SerializeField] private GameObject gameoverPanel;
     [Header("HpStat")]
     private float maxHp;
     [SerializeField] private float heeling;
@@ -64,7 +63,7 @@ public class PlayerHP : Living
         if (hp <= 0 && hp >= -999)
         {
             hp = -1999;
-            gameoverPanel.SetActive(true);
+            GameoverManager.instance.Gameover();
             Time.timeScale = 0.1f;
         }
     }

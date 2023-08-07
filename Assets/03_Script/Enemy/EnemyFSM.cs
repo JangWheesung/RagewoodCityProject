@@ -95,7 +95,6 @@ public class EnemyFSM : PlayerRoot
         gun.transform.rotation = rotation;
         gunSp.flipY = playerTrs.position.x - transform.position.x > 0 ? false : true;
 
-        lineRenderer.enabled = true;
         lineRenderer.SetPosition(0, muzzle.transform.position);
         lineRenderer.SetPosition(1, playerTrs.position);
 

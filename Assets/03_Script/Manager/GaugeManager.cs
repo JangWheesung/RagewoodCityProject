@@ -47,6 +47,11 @@ public class GaugeManager : MonoBehaviour
 
         playerThrow.bombRadius = radiusValue[bombLevel];
         playerThrow.bombDmg = dmgValue[bombLevel];
+
+        //불,얼음,가스 2번 나오는 거 방지
+        benList.Add(5);
+        benList.Add(7);
+        benList.Add(9);
     }
 
     private void Update()
@@ -63,7 +68,7 @@ public class GaugeManager : MonoBehaviour
             gaugeLevel++;
             levelText.text = gaugeLevel == maxGauge.Length - 1 ? "Lv.max" : $"Lv.{gaugeLevel}";
 
-            playerHP.hp += 20;
+            playerHP.Heeling(20);
 
             rouletteImage.rotation = Quaternion.identity;
             RouletteActive(true);

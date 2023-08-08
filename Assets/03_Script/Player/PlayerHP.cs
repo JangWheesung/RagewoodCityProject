@@ -40,6 +40,25 @@ public class PlayerHP : Living
         Hpbar();
     }
 
+    public void Heeling(int value)
+    {
+        if (hp + value > maxHp)
+            hp = maxHp;
+        else
+            hp += value;
+        slider.value = hp;
+    }
+
+    private void Die()
+    {
+        if (hp <= 0 && hp >= -999)
+        {
+            hp = -1999;
+            GameoverManager.instance.Gameover();
+            Time.timeScale = 0.1f;
+        }
+    }
+
     private IEnumerator Heel()
     {
         while (true)
@@ -55,16 +74,6 @@ public class PlayerHP : Living
 
                 slider.value = hp;
             }
-        }
-    }
-
-    private void Die()
-    {
-        if (hp <= 0 && hp >= -999)
-        {
-            hp = -1999;
-            GameoverManager.instance.Gameover();
-            Time.timeScale = 0.1f;
         }
     }
 }

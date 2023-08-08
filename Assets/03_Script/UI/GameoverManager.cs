@@ -38,8 +38,9 @@ public class GameoverManager : MonoBehaviour
             image.gameObject.SetActive(true);
             yield return new WaitForSeconds(waitTime / 10);
         }
-        Time.timeScale = 1;
 
+        DOTween.KillAll();
+        Time.timeScale = 1;
         DOTween.To(() => image.fillAmount, val => image.fillAmount = val, value, fadeTime).OnComplete(() => {
             if (value == 1)
             {

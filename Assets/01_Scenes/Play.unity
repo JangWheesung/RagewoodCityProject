@@ -2383,7 +2383,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &800658747
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3119,19 +3119,27 @@ MonoBehaviour:
   rouletteImage: {fileID: 17575204}
   rouletteBtn: {fileID: 993658458}
   rouletteTime: 2
-  maxGauge: 0a0000000b0000000c0000000d0000000e0000000f00000010000000110000001200000013000000140000001400000014000000
+  maxGauge: 0a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a000000
   radiusValue:
   - 8
-  - 9
+  - 8.5
+  - 8
+  - 9.5
   - 10
+  - 10.5
   - 11
+  - 11.5
   - 12
   dmgValue:
   - 5
-  - 10
+  - 8
+  - 12
   - 15
+  - 17
   - 20
-  - 25
+  - 24
+  - 27
+  - 30
   maxDrawcnt: 5
   levelText: {fileID: 1369431022}
   spinSpeed: 0

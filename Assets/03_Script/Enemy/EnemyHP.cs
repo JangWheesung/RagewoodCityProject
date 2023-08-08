@@ -36,6 +36,7 @@ public class EnemyHP : Living
         {
             hp = 1;
             hpBar.gameObject.SetActive(false);
+            GetComponent<EnemyFSM>().isFaint = false;
             PoliceSponManager.instance.diePolices++;
             PoliceSponManager.instance.PlusScore();
             GaugeManager.instance.GaugeUp();

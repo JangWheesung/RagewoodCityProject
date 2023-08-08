@@ -35,6 +35,7 @@ public class GameoverManager : MonoBehaviour
     {
         if (value == 1)
         {
+            image.gameObject.SetActive(true);
             yield return new WaitForSeconds(waitTime / 10);
         }
         Time.timeScale = 1;
@@ -44,8 +45,7 @@ public class GameoverManager : MonoBehaviour
             {
                 Invoke(seenName, waitTime / 2);
             }
+            image.gameObject.SetActive(value == 1 ? true : false);
         });
-
-        image.gameObject.SetActive(value == 1 ? true : false);
     }
 }

@@ -10,6 +10,7 @@ public class GaugeManager : MonoBehaviour
     public static GaugeManager instance;
 
     private PlayerThrow playerThrow;
+    private PlayerHP playerHP;
 
     [Header("Icon")]
     [SerializeField] private TextMeshProUGUI bombLevelText;
@@ -40,7 +41,9 @@ public class GaugeManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
         playerThrow = FindObjectOfType<PlayerThrow>();
+        playerHP = FindObjectOfType<PlayerHP>();
 
         playerThrow.bombRadius = radiusValue[bombLevel];
         playerThrow.bombDmg = dmgValue[bombLevel];
@@ -59,6 +62,8 @@ public class GaugeManager : MonoBehaviour
             image.fillAmount = 0;
             gaugeLevel++;
             levelText.text = gaugeLevel == maxGauge.Length - 1 ? "Lv.max" : $"Lv.{gaugeLevel}";
+
+            playerHP.hp += 20;
 
             rouletteImage.rotation = Quaternion.identity;
             RouletteActive(true);
@@ -93,9 +98,9 @@ public class GaugeManager : MonoBehaviour
     private void BuffUp()
     {
         playerThrow.throwCnt = BuffRange(0, 90) == true ? playerThrow.throwCnt + 1 : playerThrow.throwCnt;
-        playerThrow.gas = BuffRange(90, 126) == true ? true : false;
-        playerThrow.ice = BuffRange(126, 162) == true ? true : false;
-        playerThrow.fire = BuffRange(162, 198) == true ? true : false;
+        playerThrow.gas = BuffRange(90, 126) == true ? true : playerThrow.gas;
+        playerThrow.ice = BuffRange(126, 162) == true ? true : playerThrow.ice;
+        playerThrow.fire = BuffRange(162, 198) == true ? true : playerThrow.fire;
 
         if (BuffRange(198, 360))
         {

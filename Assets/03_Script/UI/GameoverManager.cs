@@ -20,15 +20,18 @@ public class GameoverManager : MonoBehaviour
         StartCoroutine(Fade(0));
     }
 
+    public void FadeIn() => StartCoroutine(Fade(1, "GameMove"));
+
     public void Gameover()
     {
         gameoverPanel.SetActive(true);
-        StartCoroutine(Fade(1));
+        StartCoroutine(Fade(1, "SeenMove"));
     }
 
     void SeenMove() => ScnenManager.instance.MoveMainScene();
+    void GameMove() => ScnenManager.instance.MoveGameScene();
 
-    private IEnumerator Fade(int value)
+    private IEnumerator Fade(int value, string seenName = null)
     {
         if (value == 1)
         {
@@ -39,7 +42,7 @@ public class GameoverManager : MonoBehaviour
         DOTween.To(() => image.fillAmount, val => image.fillAmount = val, value, fadeTime).OnComplete(() => {
             if (value == 1)
             {
-                Invoke("SeenMove", waitTime / 2);
+                Invoke(seenName, waitTime / 2);
             }
         });
 

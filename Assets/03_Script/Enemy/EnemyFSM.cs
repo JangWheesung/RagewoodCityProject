@@ -21,6 +21,7 @@ public class EnemyFSM : PlayerRoot
     private GameObject gun;
     private GameObject muzzle;
     private SpriteRenderer gunSp;
+    private AudioSource fireSound;
 
     public bool isFaint;
     bool isGas = false;
@@ -36,6 +37,9 @@ public class EnemyFSM : PlayerRoot
         gun = transform.GetChild(0).gameObject;
         muzzle = gun.transform.GetChild(0).gameObject;
         gunSp = gun.GetComponent<SpriteRenderer>();
+        fireSound = GetComponent<AudioSource>();
+
+        moveSpeed = 7;
     }
 
     private void Update()
@@ -71,6 +75,7 @@ public class EnemyFSM : PlayerRoot
         isGas = false;
         isAttack = false;
         lineRenderer.enabled = false;
+        fireSound.Stop();
 
         float distance = playerTrs.gameObject.activeSelf == true ? Mathf.Clamp(playerTrs.position.x - transform.position.x, -1f, 1f) : 0;
         rb.velocity = new Vector2(distance * moveSpeed, rb.velocity.y);
@@ -111,6 +116,7 @@ public class EnemyFSM : PlayerRoot
 
         isAttack = false;
         lineRenderer.enabled = false;
+        fireSound.Stop();
 
         StartCoroutine(InvokeDelay(() => { isFaint = false; }, 5f));
     }
@@ -123,6 +129,7 @@ public class EnemyFSM : PlayerRoot
 
     IEnumerator AttackDelay()
     {
+        fireSound.Play();
         while (state == State.Attack)
         {
             playerHP.OnDamage(attackPower);

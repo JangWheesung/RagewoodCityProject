@@ -7,11 +7,15 @@ using UnityEngine.UIElements;
 
 public class PlayerControl : PlayerRoot
 {
+    [Header("Value")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpSpeed;
     [SerializeField] private float jumpCount;
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashTime;
+    [Header("Sound")]
+    [SerializeField] private AudioSource jumpSound;
+    [SerializeField] private AudioSource dashSound;
 
     float jumpCnt;
     float dashLength = 0;
@@ -39,6 +43,7 @@ public class PlayerControl : PlayerRoot
             rb.velocity = new Vector2(x, 0.1f);
             rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
 
+            jumpSound.Play();
             jumpCnt--;
         }
 
@@ -49,6 +54,7 @@ public class PlayerControl : PlayerRoot
         if (Input.GetKeyDown(KeyCode.LeftShift) && x != 0 && !dashDelay)
         {
             dashLength = Input.GetAxis("Horizontal") * dashSpeed;
+            dashSound.Play();
             StartCoroutine(DashDelay(dashTime));
         }
     }

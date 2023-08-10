@@ -24,6 +24,7 @@ public class GaugeManager : MonoBehaviour
     [SerializeField] private RectTransform rouletteImage;
     [SerializeField] private Button rouletteBtn;
     [SerializeField] private float rouletteTime;
+    [SerializeField] private AudioSource rouletteSound;
     [Header("Value")]
     [SerializeField] private int[] maxGauge;
     [SerializeField] private float[] radiusValue;
@@ -49,9 +50,9 @@ public class GaugeManager : MonoBehaviour
         playerThrow.bombDmg = dmgValue[bombLevel];
 
         //불,얼음,가스 2번 나오는 거 방지
+        benList.Add(1);
+        benList.Add(3);
         benList.Add(5);
-        benList.Add(7);
-        benList.Add(9);
     }
 
     private void Update()
@@ -96,6 +97,7 @@ public class GaugeManager : MonoBehaviour
         else isSpin = true;
 
         spinSpeed = 10f;
+        rouletteSound.Play();
 
         StartCoroutine(StopSpin());
     }

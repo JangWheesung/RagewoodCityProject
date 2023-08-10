@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerHP : Living
 {
     [SerializeField] private GameObject prfHpBar;
+    [SerializeField] private AudioSource gameoverSound;
     [Header("HpStat")]
     private float maxHp;
     [SerializeField] private float heeling;
@@ -55,6 +56,7 @@ public class PlayerHP : Living
         {
             hp = -1999;
             GameoverManager.instance.Gameover();
+            gameoverSound.Play();
             Time.timeScale = 0.1f;
         }
     }

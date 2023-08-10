@@ -20,6 +20,9 @@ public class PlayerThrow : PlayerRoot
     private RectTransform grenadeBar;
     private Slider slider;
 
+    [Header("Sound")]
+    [SerializeField] private AudioSource throwSound;
+
     [Header("BuffEmpact")]
     [HideInInspector] public float bombRadius;
     [HideInInspector] public float bombDmg;
@@ -80,6 +83,7 @@ public class PlayerThrow : PlayerRoot
         if (Input.GetMouseButtonUp(0))
         {
             lineRenderer.enabled = false;
+            throwSound.Play();
 
             if (canThrow)
             {

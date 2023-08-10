@@ -26,6 +26,7 @@ public class Grenade : MonoBehaviour
     private Rigidbody2D rb;
 
     private ParticleSystem particle;
+    private AudioSource bombSound;
 
     private CinemachineVirtualCamera cam;
     private CinemachineBasicMultiChannelPerlin vCam;
@@ -40,6 +41,7 @@ public class Grenade : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         particle = transform.GetChild(0).GetComponent<ParticleSystem>();
+        bombSound = GetComponent<AudioSource>();
 
         cam = FindObjectOfType<CinemachineVirtualCamera>();
         vCam = cam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
@@ -72,6 +74,8 @@ public class Grenade : MonoBehaviour
 
         particle.startSize = 0.7f + (0.1f * (bombRadius - 8));
         particle.Play();
+
+        bombSound.Play();
 
         DOTween.KillAll();
         vCam.m_AmplitudeGain = 30;

@@ -1180,7 +1180,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 696522062}
         m_TargetAssemblyTypeName: BtnMovement, Assembly-CSharp
-        m_MethodName: BtnDisappear
+        m_MethodName: BtnExit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

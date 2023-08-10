@@ -20,4 +20,9 @@ public class BtnMovement : MonoBehaviour
         transform.DOMoveX(3300, 1).SetEase(Ease.InBack);
         GameoverManager.instance.FadeIn();
     }
+
+    public void BtnExit()
+    {
+        transform.DOMoveX(3300, 1).SetEase(Ease.InBack).OnComplete(() => { Application.Quit(); });
+    }
 }

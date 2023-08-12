@@ -13,6 +13,7 @@ public class PoliceSponManager : MonoBehaviour
     [SerializeField] private Transform[] sponTrs;
     [SerializeField] private GameObject police;
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private Sprite[] enemySprites;
 
     [Header("Level")]
     [SerializeField] private int maxLevel;
@@ -37,6 +38,7 @@ public class PoliceSponManager : MonoBehaviour
     {
         Transform sponTrs = this.sponTrs[Random.Range(0, this.sponTrs.Length)];
         GameObject newPolice = PoolingManager.instance.Pop(police.name, sponTrs.position);
+        newPolice.GetComponent<SpriteRenderer>().sprite = enemySprites[WantedLevel()];
         newPolice.GetComponent<EnemyFSM>().attackPower = attackValue[WantedLevel()];
         newPolice.GetComponent<EnemyHP>().hp = hpValue[WantedLevel()];
     }

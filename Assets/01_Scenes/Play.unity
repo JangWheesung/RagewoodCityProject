@@ -3394,6 +3394,13 @@ MonoBehaviour:
   - {fileID: 18374219}
   police: {fileID: 7502995851976125135, guid: 21bc8536036a7eb4f89c1063413fa77d, type: 3}
   scoreText: {fileID: 414632446}
+  enemySprites:
+  - {fileID: 21300000, guid: f7e84694d9b75ca4cab32396c99456fe, type: 3}
+  - {fileID: 21300000, guid: f7e84694d9b75ca4cab32396c99456fe, type: 3}
+  - {fileID: 21300000, guid: 131aacccae7eea54889dd68adbdeaabd, type: 3}
+  - {fileID: 21300000, guid: 131aacccae7eea54889dd68adbdeaabd, type: 3}
+  - {fileID: 21300000, guid: 65e1297cb5f80b644890cba3d4178967, type: 3}
+  - {fileID: 21300000, guid: e51dfa837ccc567459118481558f3148, type: 3}
   maxLevel: 5
   victimAmount: 35
   diePolices: 0

@@ -3,25 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum State { Idle, Attack, Stun }
+public enum State { Idle, Attack, Stun }
 
 public class EnemyFSM : PlayerRoot
 {
-    State state = State.Idle;
+    protected State state = State.Idle;
 
-    [SerializeField] private float playeRadius;
+    [SerializeField] protected float playeRadius;
     [SerializeField] public float moveSpeed;
-    [SerializeField] private float rotateSpeed;
+    [SerializeField] protected float rotateSpeed;
     [HideInInspector] public float attackPower;
-    [SerializeField] private float attackDelay;
+    [SerializeField] protected float attackDelay;
 
-    private Transform playerTrs;
-    private PlayerHP playerHP;
+    protected Transform playerTrs;
+    protected PlayerHP playerHP;
 
-    private GameObject gun;
-    private GameObject muzzle;
-    private SpriteRenderer gunSp;
-    private AudioSource fireSound;
+    protected GameObject gun;
+    protected GameObject muzzle;
+    protected SpriteRenderer gunSp;
+    protected AudioSource fireSound;
 
     public bool isFaint;
     bool isGas = false;
@@ -70,7 +70,7 @@ public class EnemyFSM : PlayerRoot
         }
     }
 
-    void IdleState()
+    protected virtual void IdleState()
     {
         isGas = false;
         isAttack = false;
@@ -84,7 +84,7 @@ public class EnemyFSM : PlayerRoot
             rb.AddForce(Vector2.up * 30, ForceMode2D.Impulse);
     }
 
-    void AttackState()
+    protected virtual void AttackState()
     {
         isGas = false;
 
@@ -127,7 +127,7 @@ public class EnemyFSM : PlayerRoot
         Gizmos.DrawWireSphere(transform.position, playeRadius);
     }
 
-    IEnumerator AttackDelay()
+    protected virtual IEnumerator AttackDelay()
     {
         fireSound.Play();
         while (state == State.Attack)

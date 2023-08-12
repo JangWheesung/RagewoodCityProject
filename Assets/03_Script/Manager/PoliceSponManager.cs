@@ -11,9 +11,13 @@ public class PoliceSponManager : MonoBehaviour
 
     [Header("Obj")]
     [SerializeField] private Transform[] sponTrs;
-    [SerializeField] private GameObject police;
-    [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private Sprite[] enemySprites;
+    [SerializeField] private TextMeshProUGUI scoreText;
+
+    [Header("Police")]
+    [SerializeField] private GameObject[] police;
+    [SerializeField] private float[] attackMultiplier;
+    [SerializeField] private float[] hpMultiplier;
 
     [Header("Level")]
     [SerializeField] private int maxLevel;
@@ -36,11 +40,23 @@ public class PoliceSponManager : MonoBehaviour
 
     private void SponPolice()
     {
+        int random = Random.Range(0, 101);
+        int policeValue = random < 66 ? 0 : random < 80 ? 1 : random < 92 ? 2 : 3;
+        PoliceSetting(police[policeValue], attackMultiplier[policeValue], hpMultiplier[policeValue]);
+
+        //0 ~ 65
+        //66 ~ 79
+        //80 ~ 91
+        //92 ~ 100
+    }
+
+    private void PoliceSetting(GameObject police, float attackMultiplier, float hpMultiplier)
+    {
         Transform sponTrs = this.sponTrs[Random.Range(0, this.sponTrs.Length)];
         GameObject newPolice = PoolingManager.instance.Pop(police.name, sponTrs.position);
         newPolice.GetComponent<SpriteRenderer>().sprite = enemySprites[WantedLevel()];
-        newPolice.GetComponent<EnemyFSM>().attackPower = attackValue[WantedLevel()];
-        newPolice.GetComponent<EnemyHP>().hp = hpValue[WantedLevel()];
+        newPolice.GetComponent<EnemyFSM>().attackPower = attackValue[WantedLevel()] * attackMultiplier;
+        newPolice.GetComponent<EnemyHP>().hp = hpValue[WantedLevel()] * hpMultiplier;
     }
 
     private int WantedLevel()

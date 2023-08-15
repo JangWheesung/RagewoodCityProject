@@ -87,6 +87,7 @@ public class Grenade : MonoBehaviour
         Collider2D[] collider2D = Physics2D.OverlapCircleAll(transform.position, bombRadius, LayerMask.GetMask("Enemy"));
         foreach (Collider2D enemy in collider2D)
         {
+            //만약 이녀석이 방패병이고 터지는 구간 앞에 방패가 있다면 방패병은 물론 방패병 뒤에 있는 놈들도 공격이 막혀야 함
             if (enemy.gameObject.activeSelf)
             {
                 float distance = Vector2.Distance(transform.position, enemy.transform.position);

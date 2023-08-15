@@ -37,8 +37,8 @@ public class EnemyHP : Living
             hp = 1;
             hpBar.gameObject.SetActive(false);
             GetComponent<EnemyFSM>().isFaint = false;
-            PoliceSponManager.instance.diePolices++;
-            PoliceSponManager.instance.PlusScore();
+            PoliceSpawnManager.instance.diePolices++;
+            PoliceSpawnManager.instance.PlusScore();
             GaugeManager.instance.GaugeUp();
             PoolingManager.instance.Pop(dieEmpact.name, transform.position);
             PoolingManager.instance.Push(gameObject);

@@ -79,7 +79,7 @@ public class GaugeManager : MonoBehaviour
     private void RouletteActive(bool active)
     {
         float posY = active == true ? 550 : -550;
-        PoliceSponManager.instance.wait = active;
+        PoliceSpawnManager.instance.wait = active;
         playerThrow.gameObject.SetActive(!active);
         if (active)
         {

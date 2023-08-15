@@ -5,9 +5,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class PoliceSponManager : MonoBehaviour
+public class PoliceSpawnManager : MonoBehaviour
 {
-    public static PoliceSponManager instance;
+    public static PoliceSpawnManager instance;
 
     [Header("Obj")]
     [SerializeField] private Transform[] sponTrs;
@@ -41,13 +41,12 @@ public class PoliceSponManager : MonoBehaviour
     private void SponPolice()
     {
         int random = Random.Range(0, 101);
-        int policeValue = random < 66 ? 0 : random < 80 ? 1 : random < 92 ? 2 : 3;
+        int policeValue = random < 76 ? 0 : random < 90 ? 1 : 2;
         PoliceSetting(police[policeValue], attackMultiplier[policeValue], hpMultiplier[policeValue]);
 
-        //0 ~ 65
-        //66 ~ 79
-        //80 ~ 91
-        //92 ~ 100
+        //0 ~ 75 75(일반)
+        //76 ~ 89 13(저격)
+        //90 ~ 100 10(방패)
     }
 
     private void PoliceSetting(GameObject police, float attackMultiplier, float hpMultiplier)

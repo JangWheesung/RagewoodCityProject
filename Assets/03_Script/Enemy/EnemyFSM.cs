@@ -24,8 +24,8 @@ public class EnemyFSM : PlayerRoot
     protected AudioSource fireSound;
 
     public bool isFaint;
-    bool isGas = false;
-    bool isAttack = false;
+    protected bool isGas = false;
+    protected bool isAttack = false;
 
     private void OnEnable()
     {
@@ -42,7 +42,7 @@ public class EnemyFSM : PlayerRoot
         moveSpeed = 7;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         Fsm();
     }

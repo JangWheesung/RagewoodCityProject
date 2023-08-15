@@ -3330,6 +3330,7 @@ MonoBehaviour:
   obj:
   - {fileID: 7502995851976125135, guid: 21bc8536036a7eb4f89c1063413fa77d, type: 3}
   - {fileID: 8391634097341528709, guid: 47be074fd871b814cbc9a75876215abd, type: 3}
+  - {fileID: 1209024078231100889, guid: db6bd43f5c362934898bc439b0de97f2, type: 3}
   - {fileID: 5773574176166797891, guid: 04b0a912835a6ee43a0bcfa83611162c, type: 3}
   - {fileID: 2219490252328996378, guid: 13fcdd0f6f9e0614181ba4b1677f9c97, type: 3}
   - {fileID: 8509095551527081057, guid: 940b940d91c240e46abfb26b002a7f88, type: 3}
@@ -3343,7 +3344,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194498765}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 418.53467, y: 240.13177, z: -0.081954226}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3404,7 +3405,7 @@ MonoBehaviour:
   police:
   - {fileID: 7502995851976125135, guid: 21bc8536036a7eb4f89c1063413fa77d, type: 3}
   - {fileID: 8391634097341528709, guid: 47be074fd871b814cbc9a75876215abd, type: 3}
-  - {fileID: 0}
+  - {fileID: 1209024078231100889, guid: db6bd43f5c362934898bc439b0de97f2, type: 3}
   - {fileID: 0}
   attackMultiplier:
   - 1
